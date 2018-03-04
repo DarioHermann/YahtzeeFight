@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <animation-list
+        android:oneShot="true">
+        <item android:drawable="@drawable/xeon_pos0" android:duration="100"/>
+        <item android:drawable="@drawable/xeon_spec1" android:duration="100"/>
+        <item android:drawable="@drawable/xeon_spec2" android:duration="100"/>
+        <item android:drawable="@drawable/xeon_spec3" android:duration="100"/>
+        <item android:drawable="@drawable/xeon_spec4" android:duration="100"/>
+        <item android:drawable="@drawable/xeon_spec1" android:duration="100"/>
+        <item android:drawable="@drawable/xeon_pos0" android:duration="100"/>
+    </animation-list>
+</selector>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <animation-list
+        android:oneShot="true">
+        <item android:drawable="@drawable/rabbit_pos0" android:duration="100"/>
+        <item android:drawable="@drawable/rabbit_attack1" android:duration="100"/>
+        <item android:drawable="@drawable/rabbit_attack2" android:duration="100"/>
+        <item android:drawable="@drawable/rabbit_attack3" android:duration="100"/>
+        <item android:drawable="@drawable/rabbit_attack2" android:duration="100"/>
+        <item android:drawable="@drawable/rabbit_attack1" android:duration="100"/>
+        <item android:drawable="@drawable/rabbit_pos0" android:duration="100"/>
+    </animation-list>
+</selector>
