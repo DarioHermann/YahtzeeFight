@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.n0773470.yahtzeefight.FightScreen">
+
+    <TextView
+        android:id="@+id/text_player_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:text="Player 1"/>
+
+    <TextView
+        android:id="@+id/text_player_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentRight="true"
+        android:textStyle="bold"
+        android:text="Player 2"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_player_one"
+        android:layout_marginLeft="8dp">
+
+        <ProgressBar
+            android:id="@+id/player_one_health_bar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/player_one_health_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:text="0/150"/>
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_player_two"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentRight="true">
+
+        <ProgressBar
+            android:id="@+id/player_two_health_bar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:scaleX="-1" />
+
+        <TextView
+            android:id="@+id/player_two_health_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:text="0/150"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/player_one_rabbid_fl"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginLeft="8dp"
+        android:layout_centerVertical="true">
+        <ImageView
+            android:id="@+id/player_one_char_rabbid"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/rabbit_spec1"/>
+        <ImageView
+            android:id="@+id/player_one_rabbid_special"
+            android:layout_width="170dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="6dp"
+            android:src="@drawable/rabbit_special_attack0"/>
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/player_one_char"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/possum_spec6"/>
+
+    <ImageView
+        android:id="@+id/player_one_special"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/player_one_char"
+        android:src="@drawable/possum_spec_attack"/>
+
+    <ImageView
+        android:id="@+id/player_two_char"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleX="-1"
+        android:layout_marginRight="8dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/xeon_spec4"/>
+
+    <ImageView
+        android:id="@+id/player_two_special"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:scaleX="-1"
+        android:layout_toLeftOf="@id/player_two_char"
+        android:src="@drawable/xeon_special_attack"/>
+
+    <FrameLayout
+        android:id="@+id/player_two_rabbid_fl"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:scaleX="-1"
+        android:layout_marginRight="8dp"
+        android:layout_centerVertical="true">
+        <ImageView
+            android:id="@+id/player_two_char_rabbid"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/rabbit_spec1"/>
+        <ImageView
+            android:id="@+id/player_two_rabbid_special"
+            android:layout_width="170dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="6dp"
+            android:src="@drawable/rabbit_special_attack0"/>
+    </FrameLayout>
+
+
+
+</RelativeLayout>
