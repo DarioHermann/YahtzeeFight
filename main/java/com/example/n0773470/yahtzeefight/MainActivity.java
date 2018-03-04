@@ -1,10 +1,13 @@
 package com.example.n0773470.yahtzeefight;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -80,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
     int player_one_total_points;
     int player_two_total_points;
 
+    int player_one_health;
+    int player_two_health;
+    int player_one_attack;
+    int player_two_attack;
+    private static final int MAX_HEALTH = 150;
+
 
 
     @Override
@@ -91,8 +100,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
+    /**
+     * roll: function to roll the dices
+     */
     private void roll(){
         Random r = new Random();
 
@@ -132,6 +142,11 @@ public class MainActivity extends AppCompatActivity {
         check_list(numbers);
     }
 
+    /**
+     * reset_values: resets the values on the table to zero (it's called before the points are shown on the table and before the next player starts his turn)
+     * @param before_count if true: doesn't change the upper values and turns the lower values in red text
+     *                     else: turns every number black and resets to zero all the values that were not used.
+     */
     private void reset_values(boolean before_count){
         TextView ones;
         TextView twos;
@@ -280,7 +295,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * check_list: Checks how many point each line weights on each roll of the dices.
+     * @param numbers list of the values of the current dices
+     */
     private void check_list(int[] numbers){
         System.arraycopy(numbers, 0, current_dice_values, 0, numbers.length);
         int upper_values[] = {0, 0, 0, 0, 0, 0};
@@ -440,6 +458,11 @@ public class MainActivity extends AppCompatActivity {
             chance.setText(Integer.toString(chance_value));
     }
 
+    /**
+     * sort_numbers: Sort the values of the dices (this is done so it's faster and easier to check if three of a kind, four of a kind, full house, etc. exist
+     * @param numbers the list of the dices current values
+     * @return sorted dice values list
+     */
     private int[] sort_numbers(int[] numbers){
         int x;
         for(int i = 0; i < numbers.length-1; i++){
@@ -454,6 +477,10 @@ public class MainActivity extends AppCompatActivity {
         return numbers;
     }
 
+    /**
+     * roll_dice: method called when the roll Button is pressed (it counts how many times the player rolled the dices)
+     *
+     */
     public void roll_dice(View view){
         Button roll_button = (Button) findViewById(R.id.roll_button);
         TextView player = (TextView) findViewById(R.id.player_option_text);
@@ -464,6 +491,9 @@ public class MainActivity extends AppCompatActivity {
         roll();
     }
 
+    /**
+     * reset_dices: resets the dices before each players turn
+     */
     private void reset_dices(){
         ImageButton dice_one = (ImageButton) findViewById(R.id.first_dice);
         ImageButton dice_two = (ImageButton) findViewById(R.id.second_dice);
@@ -495,6 +525,10 @@ public class MainActivity extends AppCompatActivity {
             player_option.setText(R.string.player_2);
     }
 
+    /**
+     * reset_game: Resets the game (points and table)
+     * it's called when the app is started at the beginning and after a player presses the button "new game"
+     */
     private void reset_game(){
         TextView win_text = (TextView) findViewById(R.id.winning_text);
         Button new_game_button = (Button) findViewById(R.id.new_game_button);
@@ -559,9 +593,17 @@ public class MainActivity extends AppCompatActivity {
         player_one_total_points = 0;
         player_two_total_points = 0;
 
+        player_one_health = MAX_HEALTH;
+        player_two_health = MAX_HEALTH;
+        player_one_attack = 0;
+        player_two_attack = 0;
+
         reset_dices();
     }
 
+    /**
+     * reset_button: it's called with reset_game. It resets all the table points "buttons" So they can be pressed again.
+     */
     private void reset_buttons(){
         FrameLayout aces_button;
         FrameLayout twos_button;
@@ -701,13 +743,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * finish_game: This method is called when the last round has been played to determine which player won
+     * and make the "new game" button visible
+     */
     private void finish_game(){
         TextView win_text = (TextView) findViewById(R.id.winning_text);
         Button new_game_button = (Button) findViewById(R.id.new_game_button);
-        if(player_one_total_points > player_two_total_points)
+        if(player_one_health > player_two_health)
             win_text.setText(R.string.player_1_wins);
-        else if(player_one_total_points < player_two_total_points)
+        else if(player_one_health < player_two_health)
             win_text.setText(R.string.player_2_wins);
         else
             win_text.setText(R.string.draw);
@@ -715,6 +760,10 @@ public class MainActivity extends AppCompatActivity {
         new_game_button.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * new_game: method called when a game is finished and the user presses the "new game" button
+     *
+     */
     public void new_game(View view){
         TextView upper_total = (TextView) findViewById(R.id.player_one_total);
         TextView bonus = (TextView) findViewById(R.id.player_one_bonus);
@@ -752,6 +801,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    /**
+     * dice_one_clicked: method called when the first dice is clicked
+     * to lock or unlock the dice
+     */
     public void dice_one_click(View view){
         ImageButton dice = (ImageButton) findViewById(R.id.first_dice);
         if(!is_dice_one_clicked){
@@ -763,6 +816,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * dice_two_clicked: method called when the second dice is clicked
+     * to lock or unlock the dice
+     */
     public void dice_two_click(View view){
         ImageButton dice = (ImageButton) findViewById(R.id.second_dice);
         if(!is_dice_two_clicked){
@@ -774,6 +831,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * dice_three_clicked: method called when the third dice is clicked
+     * to lock or unlock the dice
+     */
     public void dice_three_click(View view){
         ImageButton dice = (ImageButton) findViewById(R.id.third_dice);
         if(!is_dice_three_clicked){
@@ -785,6 +846,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * dice_four_clicked: method called when the fourth dice is clicked
+     * to lock or unlock the dice
+     */
     public void dice_four_click(View view){
         ImageButton dice = (ImageButton) findViewById(R.id.fourth_dice);
         if(!is_dice_four_clicked){
@@ -796,6 +861,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * dice_five_clicked: method called when the fifth dice is clicked
+     * to lock or unlock the dice
+     */
     public void dice_five_click(View view){
         ImageButton dice = (ImageButton) findViewById(R.id.fifth_dice);
         if(!is_dice_five_clicked){
@@ -809,18 +878,23 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+    /**
+     * update_total_points: update the players total points
+     * @param points points to be added to the total score
+     */
     private void update_total_points(int points){
         TextView total_points;
         if(is_player_one_turn) {
             total_points = (TextView) findViewById(R.id.player_one_combined_total);
             player_one_total_points += points;
             total_points.setText(Integer.toString(player_one_total_points));
+            player_one_attack = points;
         }
         else {
             total_points = (TextView) findViewById(R.id.player_two_combined_total);
             player_two_total_points += points;
             total_points.setText(Integer.toString(player_two_total_points));
+            player_two_attack = points;
         }
 
         turns_to_end--;
@@ -828,8 +902,35 @@ public class MainActivity extends AppCompatActivity {
             finish_game();
 
         reset_values(false);
+
+        if(!is_player_one_turn){
+            Intent in = new Intent(getApplicationContext(), FightScreen.class);
+            in.putExtra("healthOne", player_one_health);
+            in.putExtra("healthTwo", player_two_health);
+            in.putExtra("attackOne", player_one_attack);
+            in.putExtra("attackTwo", player_two_attack);
+            //startActivity(intent);
+            startActivityForResult(in, 100);
+        }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 100){
+            String health = data.getStringExtra("health_total");
+            player_one_health = Integer.parseInt(health.substring(0, 2));
+            player_two_health = Integer.parseInt(health.substring(3, 5));
+
+            if(player_one_health <= 0 || player_two_health <= 0)
+                finish_game();
+        }
+    }
+
+    /**
+     * update_upper_points: update the players upper points
+     * @param points points to be added to the upper score
+     */
     private void update_upper_points(int points){
         TextView up_points;
         TextView up_total_points;
@@ -878,6 +979,10 @@ public class MainActivity extends AppCompatActivity {
         update_total_points(points);
     }
 
+    /**
+     * update_lower_points: update the players lower points
+     * @param points points to be added to the lower score
+     */
     private void update_lower_points(int points){
         TextView low_points;
         if(is_player_one_turn){
@@ -893,11 +998,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * nothing: a method that does nothing. This method is called by the table buttons after they already have been pressed
+     * It's a quicker way to make so the buttons aren't clickable twice
+     */
     public void nothing(){
         ;
     }
 
 
+
+    /**
+     * aces_clicked: a method called when the aces "button" is clicked
+     */
     public void aces_clicked(View view){
         TextView aces;
         FrameLayout aces_button;
@@ -926,6 +1039,9 @@ public class MainActivity extends AppCompatActivity {
         reset_dices();
     }
 
+    /**
+     * twos_clicked: a method called when the twos "button" is clicked
+     */
     public void twos_clicked(View view){
         TextView twos;
         FrameLayout twos_button;
@@ -954,6 +1070,9 @@ public class MainActivity extends AppCompatActivity {
         reset_dices();
     }
 
+    /**
+     * threes_clicked: a method called when the threes "button" is clicked
+     */
     public void threes_clicked(View view){
         TextView threes;
         FrameLayout threes_button;
@@ -982,6 +1101,9 @@ public class MainActivity extends AppCompatActivity {
         reset_dices();
     }
 
+    /**
+     * fours_clicked: a method called when the fours "button" is clicked
+     */
     public void fours_clicked(View view){
         TextView fours;
         FrameLayout fours_button;
@@ -1010,6 +1132,9 @@ public class MainActivity extends AppCompatActivity {
         reset_dices();
     }
 
+    /**
+     * fives_clicked: a method called when the fives "button" is clicked
+     */
     public void fives_clicked(View view){
         TextView fives;
         FrameLayout fives_button;
@@ -1038,6 +1163,9 @@ public class MainActivity extends AppCompatActivity {
         reset_dices();
     }
 
+    /**
+     * sixes_clicked: a method called when the sixes "button" is clicked
+     */
     public void sixes_clicked(View view){
         TextView sixes;
         FrameLayout sixes_button;
@@ -1066,6 +1194,9 @@ public class MainActivity extends AppCompatActivity {
         reset_dices();
     }
 
+    /**
+     * three_of_a_kind_clicked: a method called when the 3 of a kind "button" is clicked
+     */
     public void three_of_a_kind_clicked(View view){
         TextView three_kind;
         FrameLayout three_kind_button;
@@ -1099,6 +1230,9 @@ public class MainActivity extends AppCompatActivity {
         reset_dices();
     }
 
+    /**
+     * four_of_a_kind_clicked: a method called when the 4 of a kind "button" is clicked
+     */
     public void four_of_a_kind_clicked(View view){
         TextView four_kind;
         FrameLayout four_kind_button;
@@ -1132,6 +1266,9 @@ public class MainActivity extends AppCompatActivity {
         reset_dices();
     }
 
+    /**
+     * full_house_clicked: a method called when the fll house "button" is clicked
+     */
     public void full_house_clicked(View view){
         TextView full_house;
         FrameLayout full_house_button;
@@ -1162,6 +1299,9 @@ public class MainActivity extends AppCompatActivity {
         reset_dices();
     }
 
+    /**
+     * small_straight_clicked: a method called when the small straight "button" is clicked
+     */
     public void small_straight_clicked(View view){
         TextView small_straight;
         FrameLayout small_straight_button;
@@ -1191,6 +1331,9 @@ public class MainActivity extends AppCompatActivity {
         reset_dices();
     }
 
+    /**
+     * _clicked: a method called when the large straight "button" is clicked
+     */
     public void large_straight_clicked(View view){
         TextView large_straight;
         FrameLayout large_straight_button;
@@ -1220,6 +1363,9 @@ public class MainActivity extends AppCompatActivity {
         reset_dices();
     }
 
+    /**
+     * yahtzee_clicked: a method called when the yahtzee "button" is clicked
+     */
     public void yahtzee_clicked(View view){
         TextView yahtzee;
         FrameLayout yahtzee_button;
@@ -1249,6 +1395,9 @@ public class MainActivity extends AppCompatActivity {
         reset_dices();
     }
 
+    /**
+     * chance_clicked: a method called when the chance "button" is clicked
+     */
     public void chance_clicked(View view){
         TextView chance;
         FrameLayout chance_button;
