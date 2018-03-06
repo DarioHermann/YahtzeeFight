@@ -81,16 +81,14 @@
         <ImageView
             android:id="@+id/player_one_char_rabbid"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/rabbit_spec1"/>
+            android:layout_height="100dp"/>
         <ImageView
             android:id="@+id/player_one_rabbid_special"
             android:layout_width="170dp"
             android:layout_height="100dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="56dp"
-            android:layout_marginTop="6dp"
-            android:src="@drawable/rabbit_special_attack0"/>
+            android:layout_marginTop="6dp"/>
     </FrameLayout>
 
     <ImageView
@@ -98,16 +96,14 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="8dp"
-        android:src="@drawable/possum_spec6"/>
+        android:layout_marginLeft="8dp"/>
 
     <ImageView
         android:id="@+id/player_one_special"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/player_one_char"
-        android:src="@drawable/possum_spec_attack"/>
+        android:layout_toRightOf="@id/player_one_char"/>
 
     <ImageView
         android:id="@+id/player_two_char"
@@ -116,8 +112,7 @@
         android:scaleX="-1"
         android:layout_marginRight="8dp"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/xeon_spec4"/>
+        android:layout_alignParentRight="true"/>
 
     <ImageView
         android:id="@+id/player_two_special"
@@ -125,8 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:scaleX="-1"
-        android:layout_toLeftOf="@id/player_two_char"
-        android:src="@drawable/xeon_special_attack"/>
+        android:layout_toLeftOf="@id/player_two_char"/>
 
     <FrameLayout
         android:id="@+id/player_two_rabbid_fl"
@@ -139,16 +133,14 @@
         <ImageView
             android:id="@+id/player_two_char_rabbid"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/rabbit_spec1"/>
+            android:layout_height="100dp"/>
         <ImageView
             android:id="@+id/player_two_rabbid_special"
             android:layout_width="170dp"
             android:layout_height="100dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="56dp"
-            android:layout_marginTop="6dp"
-            android:src="@drawable/rabbit_special_attack0"/>
+            android:layout_marginTop="6dp"/>
     </FrameLayout>
 
 

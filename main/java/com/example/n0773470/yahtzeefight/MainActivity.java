@@ -919,8 +919,8 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == 100){
             String health = data.getStringExtra("health_total");
-            player_one_health = Integer.parseInt(health.substring(0, 2));
-            player_two_health = Integer.parseInt(health.substring(3, 5));
+            player_one_health = Integer.parseInt(health.substring(0, 3));
+            player_two_health = Integer.parseInt(health.substring(3, 6));
 
             if(player_one_health <= 0 || player_two_health <= 0)
                 finish_game();
