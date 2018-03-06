@@ -2,6 +2,7 @@ package com.example.n0773470.yahtzeefight;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -114,24 +115,24 @@ public class FightScreen extends AppCompatActivity {
             health_total+="0";
         health_total += new_health_two;
 
-        health_bars();
+        health_bars(health_one, health_two);
         return health_total;
     }
 
-    private void health_bars(){
+    private void health_bars(int points_one, int points_two){
 
         healthBarOne.setMax(MAX_HEALTH);
-        healthBarOne.setProgress(health_one);
+        healthBarOne.setProgress(points_one);
         String points = "";
-        points += health_one;
+        points += points_one;
         points += "/";
         points += MAX_HEALTH;
         health_points_one.setText(points);
 
         healthBarTwo.setMax(MAX_HEALTH);
-        healthBarTwo.setProgress(health_two);
+        healthBarTwo.setProgress(points_two);
         points = "";
-        points += health_two;
+        points += points_two;
         points += "/";
         points += MAX_HEALTH;
         health_points_two.setText(points);
@@ -171,11 +172,12 @@ public class FightScreen extends AppCompatActivity {
         if(hasFocus){
             Thread th = new Thread(){
                 public void run(){
+                    attackAnimation();
                     try {
                         Thread.sleep(2000);
                     } catch(InterruptedException e){
                     }
-                    attackAnimation();
+                    health_bars(new_health_one, new_health_two);
                 }
             };
             th.start();
@@ -183,19 +185,9 @@ public class FightScreen extends AppCompatActivity {
         }
     }
     private void attackAnimation(){
-        healthBarOne.setProgress(new_health_one);
-        String points = "";
-        points += new_health_one;
-        points += "/";
-        points += MAX_HEALTH;
-        health_points_one.setText(points);
-
-        healthBarTwo.setProgress(new_health_two);
-        points = "";
-        points += new_health_two;
-        points += "/";
-        points += MAX_HEALTH;
-        health_points_two.setText(points);
+        player_one_char.setBackgroundResource(R.drawable.possum_attack);
+        AnimationDrawable number_one = (AnimationDrawable) player_one_char.getBackground();
+        number_one.start();
     }
 
 }
