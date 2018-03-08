@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.n0773470.yahtzeefight.SelectScreen">
+
+    <ImageView
+        android:id="@+id/game_title"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/yahtzee_fight"/>
+
+    <Button
+        android:id="@+id/first_button"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:layout_below="@id/game_title"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:text="Possum"
+        android:onClick="choosePossum"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_alignTop="@id/first_button"
+        android:layout_toLeftOf="@id/first_button"
+        android:src="@drawable/possum_pos0"/>
+
+    <Button
+        android:id="@+id/second_button"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/first_button"
+        android:text="Xeon"
+        android:onClick="chooseXeon"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_alignTop="@id/second_button"
+        android:layout_toLeftOf="@id/second_button"
+        android:src="@drawable/xeon_pos0"/>
+
+    <Button
+        android:id="@+id/third_button"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/second_button"
+        android:text="Rabbit"
+        android:onClick="chooseRabbit"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_alignTop="@id/third_button"
+        android:layout_toLeftOf="@id/third_button"
+        android:src="@drawable/rabbit_pos0"/>
+
+    <TextView
+        android:id="@+id/player_choose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/third_button"
+        android:layout_marginTop="25dp"
+        android:textSize="20dp"
+        android:textColor="@android:color/black"
+        android:layout_centerHorizontal="true"
+        android:text="Player 1, Choose your Character"/>
+
+</RelativeLayout>

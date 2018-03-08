@@ -29,6 +29,8 @@ public class FightScreen extends AppCompatActivity {
 
     private long fileSize = 0;
 
+    int player_one_char_selected;
+    int player_two_char_selected;
     int health_one = 0;
     int health_two = 0;
     int attack_one = 0;
@@ -67,6 +69,8 @@ public class FightScreen extends AppCompatActivity {
         health_two = i.getIntExtra("healthTwo", -1);
         attack_one = i.getIntExtra("attackOne", -1);
         attack_two = i.getIntExtra("attackTwo", -1);
+        player_one_char_selected = i.getIntExtra("charOne", -1);
+        player_two_char_selected = i.getIntExtra("charTwo", -1);
 
         healthBarOne = (ProgressBar) findViewById(R.id.player_one_health_bar);
         healthBarTwo = (ProgressBar) findViewById(R.id.player_two_health_bar);
@@ -103,10 +107,17 @@ public class FightScreen extends AppCompatActivity {
         new_health_one = health_one;
         new_health_two = health_two;
 
-        if(attack_one >= attack_two)
-            new_health_two = health_two - (attack_one-attack_two);
+        if(attack_one == 50 && attack_two == 50){
+            new_health_one -= 50;
+            new_health_two -= 50;
+        } else if(attack_one == 50)
+            new_health_two -= 50;
+        else if(attack_two == 50)
+            new_health_one -=50;
+        else if(attack_one >= attack_two)
+            new_health_two -= (attack_one-attack_two);
         else
-            new_health_one = health_one - (attack_two-attack_one);
+            new_health_one -= (attack_two-attack_one);
 
         String health_total = "";
 
@@ -181,43 +192,155 @@ public class FightScreen extends AppCompatActivity {
         }
     }
     private void attackAnimation(){
-        if(attack_one == 50 && attack_two == 50){
-            player_one_char.setBackgroundResource(R.drawable.possum_special);
-            number_one = (AnimationDrawable) player_one_char.getBackground();
-            player_two_char.setBackgroundResource(R.drawable.xeon_special);
-            number_two = (AnimationDrawable) player_two_char.getBackground();
-            player_one_special.setBackgroundResource(R.drawable.possum_special_attack);
-            number_three = (AnimationDrawable) player_one_special.getBackground();
-            player_two_special.setBackgroundResource(R.drawable.xeon_special_attack);
-            number_four = (AnimationDrawable) player_two_special.getBackground();
-            isNumberThree = true;
-            isNumberFour = true;
-        } else if(attack_one == 50){
-            player_one_char.setBackgroundResource(R.drawable.possum_special);
-            number_one = (AnimationDrawable) player_one_char.getBackground();
-            player_two_char.setBackgroundResource(R.drawable.xeon_defence);
-            number_two = (AnimationDrawable) player_two_char.getBackground();
-            player_one_special.setBackgroundResource(R.drawable.possum_special_attack);
-            number_three = (AnimationDrawable) player_one_special.getBackground();
+        if(attack_one == 50){
+            if(player_one_char_selected ==1)
+                isPossum(1, 3);
+            else if(player_one_char_selected == 2)
+                isXeon(1, 3);
+            else
+                isRabbit(1, 3);
             isNumberThree = true;
         } else if(attack_two == 50){
-            player_one_char.setBackgroundResource(R.drawable.possum_defence);
-            number_one = (AnimationDrawable) player_one_char.getBackground();
-            player_two_char.setBackgroundResource(R.drawable.xeon_special);
-            number_two = (AnimationDrawable) player_two_char.getBackground();
-            player_two_special.setBackgroundResource(R.drawable.xeon_special_attack);
-            number_four = (AnimationDrawable) player_two_special.getBackground();
+            if(player_two_char_selected ==1)
+                isPossum(2, 3);
+            else if(player_two_char_selected == 2)
+                isXeon(2, 3);
+            else
+                isRabbit(2, 3);
             isNumberFour = true;
-        } else if(attack_one >= attack_two) {
-            player_one_char.setBackgroundResource(R.drawable.possum_attack);
+        }
+        if(attack_one >= attack_two) {
+            if(attack_one != 50){
+                if(player_one_char_selected == 1)
+                    isPossum(1, 1);
+                if(player_one_char_selected == 1)
+                    isXeon(1, 1);
+                if(player_one_char_selected == 3)
+                    isRabbit(1, 1);
+            }
+            if(attack_two != 50){
+                if(player_two_char_selected == 1)
+                    isPossum(2, 2);
+                if(player_two_char_selected == 1)
+                    isXeon(2, 2);
+                if(player_one_char_selected == 3)
+                    isRabbit(2, 2);
+            }
+            /*player_one_char.setBackgroundResource(R.drawable.possum_attack);
             number_one = (AnimationDrawable) player_one_char.getBackground();
             player_two_char.setBackgroundResource(R.drawable.xeon_defence);
-            number_two = (AnimationDrawable) player_two_char.getBackground();
-        } else{
-            player_one_char.setBackgroundResource(R.drawable.possum_defence);
+            number_two = (AnimationDrawable) player_two_char.getBackground();*/
+        } else if(attack_two > attack_one){
+
+            if(player_one_char_selected == 1)
+                isPossum(1, 2);
+            if(player_one_char_selected == 1)
+                isXeon(1, 2);
+            if(player_one_char_selected == 3)
+                isRabbit(1, 2);
+
+            if(attack_two != 50){
+                if(player_two_char_selected == 1)
+                    isPossum(2, 1);
+                if(player_two_char_selected == 1)
+                    isXeon(2, 1);
+                if(player_one_char_selected == 3)
+                    isRabbit(2, 1);
+            }
+           /* player_one_char.setBackgroundResource(R.drawable.possum_defence);
             number_one = (AnimationDrawable) player_one_char.getBackground();
             player_two_char.setBackgroundResource(R.drawable.xeon_attack);
-            number_two = (AnimationDrawable) player_two_char.getBackground();
+            number_two = (AnimationDrawable) player_two_char.getBackground();*/
+        }
+    }
+
+    private void isPossum(int player, int move_type){
+        if(player == 1){
+            if(move_type == 1) {
+                player_one_char.setBackgroundResource(R.drawable.possum_attack);
+                number_one = (AnimationDrawable) player_one_char.getBackground();
+            } else if(move_type == 2){
+                player_one_char.setBackgroundResource(R.drawable.possum_defence);
+                number_one = (AnimationDrawable) player_one_char.getBackground();
+            } else{
+                player_one_char.setBackgroundResource(R.drawable.possum_special);
+                number_one = (AnimationDrawable) player_one_char.getBackground();
+                player_one_special.setBackgroundResource(R.drawable.possum_special_attack);
+                number_three = (AnimationDrawable) player_one_special.getBackground();
+            }
+        } else if(player == 2){
+            if(move_type == 1) {
+                player_two_char.setBackgroundResource(R.drawable.possum_attack);
+                number_two = (AnimationDrawable) player_two_char.getBackground();
+            } else if(move_type == 2){
+                player_two_char.setBackgroundResource(R.drawable.possum_defence);
+                number_two = (AnimationDrawable) player_two_char.getBackground();
+            } else{
+                player_two_char.setBackgroundResource(R.drawable.possum_special);
+                number_two = (AnimationDrawable) player_two_char.getBackground();
+                player_two_special.setBackgroundResource(R.drawable.possum_special_attack);
+                number_four = (AnimationDrawable) player_two_special.getBackground();
+            }
+        }
+    }
+
+    private void isXeon(int player, int move_type){
+        if(player == 1){
+            if(move_type == 1) {
+                player_one_char.setBackgroundResource(R.drawable.xeon_attack);
+                number_one = (AnimationDrawable) player_one_char.getBackground();
+            } else if(move_type == 2){
+                player_one_char.setBackgroundResource(R.drawable.xeon_defence);
+                number_one = (AnimationDrawable) player_one_char.getBackground();
+            } else{
+                player_one_char.setBackgroundResource(R.drawable.xeon_special);
+                number_one = (AnimationDrawable) player_one_char.getBackground();
+                player_one_special.setBackgroundResource(R.drawable.xeon_special_attack);
+                number_three = (AnimationDrawable) player_one_special.getBackground();
+            }
+        } else if(player == 2){
+            if(move_type == 1) {
+                player_two_char.setBackgroundResource(R.drawable.xeon_attack);
+                number_two = (AnimationDrawable) player_two_char.getBackground();
+            } else if(move_type == 2){
+                player_two_char.setBackgroundResource(R.drawable.xeon_defence);
+                number_two = (AnimationDrawable) player_two_char.getBackground();
+            } else{
+                player_two_char.setBackgroundResource(R.drawable.xeon_special);
+                number_two = (AnimationDrawable) player_two_char.getBackground();
+                player_two_special.setBackgroundResource(R.drawable.xeon_special_attack);
+                number_four = (AnimationDrawable) player_two_special.getBackground();
+            }
+        }
+    }
+
+    private void isRabbit(int player, int move_type){
+        if(player == 1){
+            if(move_type == 1) {
+                player_one_rabbid.setBackgroundResource(R.drawable.rabbit_attack);
+                number_one = (AnimationDrawable) player_one_rabbid.getBackground();
+            } else if(move_type == 2){
+                player_one_rabbid.setBackgroundResource(R.drawable.rabbit_defence);
+                number_one = (AnimationDrawable) player_one_rabbid.getBackground();
+            } else{
+                player_one_rabbid.setBackgroundResource(R.drawable.rabbit_special);
+                number_one = (AnimationDrawable) player_one_rabbid.getBackground();
+                player_one_rabbid_special.setBackgroundResource(R.drawable.rabbit_special_attack);
+                number_three = (AnimationDrawable) player_one_rabbid_special.getBackground();
+            }
+        } else if(player == 2){
+            if(move_type == 1) {
+                player_two_rabbid.setBackgroundResource(R.drawable.rabbit_attack);
+                number_two = (AnimationDrawable) player_two_rabbid.getBackground();
+            } else if(move_type == 2){
+                player_two_rabbid.setBackgroundResource(R.drawable.rabbit_defence);
+                number_two = (AnimationDrawable) player_two_rabbid.getBackground();
+            } else{
+                player_two_rabbid.setBackgroundResource(R.drawable.rabbit_special);
+                number_two = (AnimationDrawable) player_two_rabbid.getBackground();
+                player_two_rabbid_special.setBackgroundResource(R.drawable.rabbit_special_attack);
+                number_four = (AnimationDrawable) player_two_rabbid_special.getBackground();
+            }
         }
     }
 

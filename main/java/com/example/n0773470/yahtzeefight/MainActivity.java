@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
     int player_one_total_points;
     int player_two_total_points;
 
+    int player_one_character;
+    int player_two_character;
     int player_one_health;
     int player_two_health;
     int player_one_attack;
@@ -599,6 +601,8 @@ public class MainActivity extends AppCompatActivity {
         player_two_attack = 0;
 
         reset_dices();
+        Intent screen = new Intent(getApplicationContext(), SelectScreen.class);
+        startActivityForResult(screen, 200);
     }
 
     /**
@@ -757,6 +761,7 @@ public class MainActivity extends AppCompatActivity {
         else
             win_text.setText(R.string.draw);
 
+        win_text.setVisibility(View.VISIBLE);
         new_game_button.setVisibility(View.VISIBLE);
     }
 
@@ -898,13 +903,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         turns_to_end--;
-        if(turns_to_end <= 0)
-            finish_game();
 
         reset_values(false);
 
         if(!is_player_one_turn){
             Intent in = new Intent(getApplicationContext(), FightScreen.class);
+            in.putExtra("charOne", player_one_character);
+            in.putExtra("charTwo", player_two_character);
             in.putExtra("healthOne", player_one_health);
             in.putExtra("healthTwo", player_two_health);
             in.putExtra("attackOne", player_one_attack);
@@ -922,8 +927,16 @@ public class MainActivity extends AppCompatActivity {
             player_one_health = Integer.parseInt(health.substring(0, 3));
             player_two_health = Integer.parseInt(health.substring(3, 6));
 
-            if(player_one_health <= 0 || player_two_health <= 0)
+            if(player_one_health <= 0 || player_two_health <= 0 || turns_to_end <= 0)
                 finish_game();
+        }
+        else if(resultCode == 200){
+            String chars = data.getStringExtra("characters");
+
+            player_one_character = Integer.parseInt(chars.substring(0, 1));
+            player_two_character = Integer.parseInt(chars.substring(1, 2));
+
+            //reset_game();
         }
     }
 
