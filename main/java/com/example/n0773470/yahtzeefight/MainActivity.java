@@ -1,9 +1,11 @@
 package com.example.n0773470.yahtzeefight;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     TypedArray dice_faces;
     TypedArray dice_faces_clicked;
+    TextView roll_number;
     int times_rolled;
     int turns_to_end;
     boolean is_player_one_turn;
@@ -89,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     int player_two_health;
     int player_one_attack;
     int player_two_attack;
-    private static final int MAX_HEALTH = 150;
+    private static final int MAX_HEALTH = 100;
 
 
 
@@ -295,6 +298,8 @@ public class MainActivity extends AppCompatActivity {
             chance.setText("0");
         }
 
+        if(!before_count)
+            roll_number.setText("3");
     }
 
     /**
@@ -410,27 +415,29 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < numbers.length; i++)
             chance_value+=numbers[i];
 
+        //I think this for is a quicker way to find out about a lot of the points possible
         for(int i =0; i < 3; i++){
-            if(numbers[i] == numbers[i+1] && numbers[i+1]==numbers[i+2]){
+            if(numbers[i] == numbers[i+1] && numbers[i+1]==numbers[i+2]){ //If this is true, three of a kind exists
                 exists_three_kind = true;
                 if(i < 2) {
-                    if (numbers[i + 2] == numbers[i + 3]) {
+                    if (numbers[i + 2] == numbers[i + 3]) { //If i < 2 and this is true, a four of a kind exists
                         exists_four_kind = true;
                         if (i == 0) {
-                            if (numbers[i + 3] == numbers[i + 4])
+                            if (numbers[i + 3] == numbers[i + 4]) //If i < 1 and this is true, yahtzee exists
                                 exists_yahtzee = true;
                         }
-                    }else if(i == 0 && numbers[i+3] == numbers[i+4]){
+                    }else if(i == 0 && numbers[i+3] == numbers[i+4]){ //if 3 of a kind and 2 of another kind exist, then Full House exists
                         exists_full_house = true;
                     }
                 }
                 if(i == 2 && numbers[0] == numbers[1])
                     exists_full_house = true;
             }
-            if(exists_three_kind)
+            if(exists_three_kind) //If three of a kind was proven, we can break out of the for loop
                 break;
         }
 
+        //setting the points for the players to guide themselves (a good option for yahtzee begginners)
        if(exists_three_kind && !three_kind_is_off)
             three_of_a_kind.setText(Integer.toString(chance_value));
        if(exists_four_kind && !four_kind_is_off)
@@ -440,6 +447,7 @@ public class MainActivity extends AppCompatActivity {
        if(exists_yahtzee && !yahtzee_is_off)
            yahtzee.setText("50");
 
+       //Checks if small or large straight exist (1-2-3-4-5 or 2-3-4-5-6)
        for(int i = 0; i < numbers.length-1; i++) {
            if (numbers[i] != (numbers[i + 1] + 1))
                break;
@@ -485,11 +493,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void roll_dice(View view){
         Button roll_button = (Button) findViewById(R.id.roll_button);
-        TextView player = (TextView) findViewById(R.id.player_option_text);
         times_rolled++;
         if(times_rolled >= 3) {
             roll_button.setVisibility(View.INVISIBLE);
         }
+        roll_number.setText(Integer.toString(3-times_rolled)); //This updates the Baloon on the right of the roll button. (Indicates how many rolls the player can make)
         roll();
     }
 
@@ -540,6 +548,8 @@ public class MainActivity extends AppCompatActivity {
 
         win_text.setVisibility(View.INVISIBLE);
         new_game_button.setVisibility(View.INVISIBLE);
+
+        roll_number = (TextView) findViewById(R.id.roll_number);
 
         is_player_one_turn = false;
         turns_to_end = 26;
@@ -784,8 +794,8 @@ public class MainActivity extends AppCompatActivity {
             texts[i].setTextColor(Color.BLACK);
         }
 
-        texts[0] = findViewById(R.id.player_two_total);
-        texts[1] = findViewById(R.id.player_two_bonus);
+        texts[0] = (TextView) findViewById(R.id.player_two_total);
+        texts[1] = (TextView) findViewById(R.id.player_two_bonus);
         texts[2] = (TextView) findViewById(R.id.player_two_up_total);
         texts[3] = (TextView) findViewById(R.id.player_two_low_total);
         texts[4] = (TextView) findViewById(R.id.player_two_up_total_total);
@@ -902,10 +912,11 @@ public class MainActivity extends AppCompatActivity {
             player_two_attack = points;
         }
 
-        turns_to_end--;
+        turns_to_end--; //counter to end the game, if it reaches 0, it means all boxes where ticked
 
         reset_values(false);
 
+        //After the second player has played, the Activity FightScreen gets called
         if(!is_player_one_turn){
             Intent in = new Intent(getApplicationContext(), FightScreen.class);
             in.putExtra("charOne", player_one_character);
@@ -914,15 +925,22 @@ public class MainActivity extends AppCompatActivity {
             in.putExtra("healthTwo", player_two_health);
             in.putExtra("attackOne", player_one_attack);
             in.putExtra("attackTwo", player_two_attack);
-            //startActivity(intent);
-            startActivityForResult(in, 100);
+            startActivityForResult(in, 100); //startActivityForResult(Intent, requestCod) is the same as startActivity(Intent)
+            //But it expects a result back from the second activity (like a return type of a method)
+            //And it's caught by the onActivityResult method
         }
     }
 
+    /**
+     * onActivityResult: The method that catches the result from the activity called
+     * @param requestCode codeInput in startActivityForResult
+     * @param resultCode codeInput in the other's activity setResult
+     * @param data The result obtained from the other activity
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == 100){
+        if(resultCode == 100){ //FightScreen resultCode
             String health = data.getStringExtra("health_total");
             player_one_health = Integer.parseInt(health.substring(0, 3));
             player_two_health = Integer.parseInt(health.substring(3, 6));
@@ -930,13 +948,11 @@ public class MainActivity extends AppCompatActivity {
             if(player_one_health <= 0 || player_two_health <= 0 || turns_to_end <= 0)
                 finish_game();
         }
-        else if(resultCode == 200){
+        else if(resultCode == 200){ //SelectScren resultCode
             String chars = data.getStringExtra("characters");
 
             player_one_character = Integer.parseInt(chars.substring(0, 1));
             player_two_character = Integer.parseInt(chars.substring(1, 2));
-
-            //reset_game();
         }
     }
 

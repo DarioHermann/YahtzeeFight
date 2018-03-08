@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.n0773470.yahtzeefight.SelectScreen">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFE082"/>
+
+
     <ImageView
         android:id="@+id/game_title"
         android:layout_width="match_parent"
@@ -25,11 +31,11 @@
         android:onClick="choosePossum"/>
 
     <ImageView
+        android:id="@+id/possum"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
         android:layout_alignTop="@id/first_button"
-        android:layout_toLeftOf="@id/first_button"
-        android:src="@drawable/possum_pos0"/>
+        android:layout_toLeftOf="@id/first_button"/>
 
     <Button
         android:id="@+id/second_button"
@@ -42,11 +48,11 @@
         android:onClick="chooseXeon"/>
 
     <ImageView
+        android:id="@+id/xeon"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
         android:layout_alignTop="@id/second_button"
-        android:layout_toLeftOf="@id/second_button"
-        android:src="@drawable/xeon_pos0"/>
+        android:layout_toLeftOf="@id/second_button"/>
 
     <Button
         android:id="@+id/third_button"
@@ -59,11 +65,11 @@
         android:onClick="chooseRabbit"/>
 
     <ImageView
+        android:id="@+id/rabbit"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
         android:layout_alignTop="@id/third_button"
-        android:layout_toLeftOf="@id/third_button"
-        android:src="@drawable/rabbit_pos0"/>
+        android:layout_toLeftOf="@id/third_button"/>
 
     <TextView
         android:id="@+id/player_choose"

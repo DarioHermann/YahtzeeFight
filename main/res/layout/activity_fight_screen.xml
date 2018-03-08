@@ -72,24 +72,12 @@
             android:text="0/150"/>
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/player_one_rabbid_fl"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/player_one_rabbid_special"
+        android:layout_width="230dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="8dp"
-        android:layout_centerVertical="true">
-        <ImageView
-            android:id="@+id/player_one_char_rabbid"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
-        <ImageView
-            android:id="@+id/player_one_rabbid_special"
-            android:layout_width="170dp"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="56dp"
-            android:layout_marginTop="6dp"/>
-    </FrameLayout>
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"/>
 
     <ImageView
         android:id="@+id/player_one_char"
@@ -122,26 +110,14 @@
         android:scaleX="-1"
         android:layout_toLeftOf="@id/player_two_char"/>
 
-    <FrameLayout
-        android:id="@+id/player_two_rabbid_fl"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/player_two_rabbid_special"
+        android:layout_width="230dp"
         android:layout_height="100dp"
-        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:scaleX="-1"
         android:layout_marginRight="8dp"
-        android:layout_centerVertical="true">
-        <ImageView
-            android:id="@+id/player_two_char_rabbid"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
-        <ImageView
-            android:id="@+id/player_two_rabbid_special"
-            android:layout_width="170dp"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="56dp"
-            android:layout_marginTop="6dp"/>
-    </FrameLayout>
+        android:layout_alignParentRight="true"/>
 
 
 

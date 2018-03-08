@@ -1111,7 +1111,7 @@
                 android:background="@drawable/dice_five"
                 android:onClick="dice_five_click"/>
         </FrameLayout>
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
@@ -1119,10 +1119,35 @@
                 android:id="@+id/roll_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_centerInParent="true"
                 android:text="@string/roll"
                 android:onClick="roll_dice"/>
-        </FrameLayout>
+
+            <ImageView
+                android:id="@+id/roll_number_backgroung"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/roll_button"
+                android:layout_alignBottom="@id/roll_button"
+                android:layout_toRightOf="@id/roll_button"
+                android:paddingRight="8dp"
+                android:src="@drawable/roll_number"/>
+
+            <TextView
+                android:id="@+id/roll_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_alignTop="@id/roll_button"
+                android:layout_alignBottom="@id/roll_button"
+                android:textSize="20dp"
+                android:layout_alignLeft="@id/roll_number_backgroung"
+                android:layout_alignRight="@id/roll_number_backgroung"
+                android:layout_toRightOf="@id/roll_button"
+                android:paddingLeft="5dp"
+                android:gravity="center"
+                android:text="3"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <TextView
