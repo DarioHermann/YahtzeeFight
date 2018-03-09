@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ @author  Dario Hermann
+ @version 1.00, 08/03/2018
+
+ All three Character belong to Redshrike
+ The Awesome Possum: https://opengameart.org/content/the-awesome-possum-ultimate-smash-friends
+ Xeon: https://opengameart.org/content/xeon-ultimate-smash-friends
+ Surge (Rabbit): https://opengameart.org/content/surge-of-opensurge-for-ultimate-smash-friends
+ -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

@@ -1,5 +1,15 @@
 package com.example.n0773470.yahtzeefight;
 
+/**
+ * @author  Dario Hermann
+ * @version 1.00, 08/03/2018
+ *
+ * All three Character belong to Redshrike
+ * The Awesome Possum: https://opengameart.org/content/the-awesome-possum-ultimate-smash-friends
+ * Xeon: https://opengameart.org/content/xeon-ultimate-smash-friends
+ * Surge (Rabbit): https://opengameart.org/content/surge-of-opensurge-for-ultimate-smash-friends
+ */
+
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.Image;
