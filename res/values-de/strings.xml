@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="player">Spieler</string>
+    <string name="aces">1-er</string>
+    <string name="twos">2-er</string>
+    <string name="threes">3-er</string>
+    <string name="fours">4-er</string>
+    <string name="fives">5-er</string>
+    <string name="sixes">6-er</string>
+    <string name="up_total">Oberer Total</string>
+    <string name="three_kind">Dreierpasch</string>
+    <string name="four_kind">Viererpasch</string>
+    <string name="sm_straight">Kleine Straße</string>
+    <string name="lg_straight">Grosse Straße</string>
+    <string name="yahtzee" translatable="false">Kniffel</string>
+    <string name="low_total">Unterer Total</string>
+    <string name="roll">Würfeln</string>
+    <string name="player_one">Spieler 1</string>
+    <string name="player_two">Spieler 2</string>
+    <string name="player_1">encue</string>
+    <string name="player_2">ecw</string>
+    <string name="player_1_wins">Spieler 1 Gewinnt</string>
+    <string name="player_2_wins">Spieler 2 Gewinnt</string>
+    <string name="draw">Unentschieden</string>
+    <string name="new_game">Neues Spiel</string>
+    <string name="player_one_chooses">Spieler 1, welle deine Charakter</string>
+    <string name="player_two_chooses">Spieler 2, we deine Charakter</string>
+    <string name="app_name">Yahtzee Fight</string>
+</resources>
