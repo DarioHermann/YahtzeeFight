@@ -74,7 +74,7 @@ public class SelectScreen extends AppCompatActivity {
      */
     private void changeText(){
         TextView text = (TextView) findViewById(R.id.player_choose);
-        text.setText("Player 2, Choose your Character");
+        text.setText(R.string.player_two_chooses);
     }
 
     /**

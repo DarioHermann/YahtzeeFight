@@ -7,22 +7,26 @@
     <string name="fours">Fours</string>
     <string name="fives">Fives</string>
     <string name="sixes">Sixes</string>
-    <string name="total">Total</string>
-    <string name="bonus">Bonus</string>
+    <string name="total" translatable="false">Total</string>
+    <string name="bonus" translatable="false">Bonus</string>
     <string name="up_total">Upper Total</string>
     <string name="three_kind">3 of a Kind</string>
     <string name="four_kind">4 of a Kind</string>
-    <string name="full_house">Full House</string>
+    <string name="full_house" translatable="false">Full House</string>
     <string name="sm_straight">Small Straight</string>
     <string name="lg_straight">Large Straight</string>
     <string name="yahtzee">Yahtzee</string>
-    <string name="chance">Chance</string>
+    <string name="chance" translatable="false">Chance</string>
     <string name="low_total">Lower Total</string>
     <string name="roll">Roll</string>
+    <string name="player_one">Player 1</string>
+    <string name="player_two">Player 2</string>
     <string name="player_1">P\nl\na\ny\ne\nr\n \n1</string>
     <string name="player_2">P\nl\na\ny\ne\nr\n \n2</string>
     <string name="player_1_wins">PLAYER 1 WINS!</string>
     <string name="player_2_wins">PLAYER 2 WINS!</string>
     <string name="draw">DRAW! :(</string>
     <string name="new_game">New Game</string>
+    <string name="player_one_chooses">Player 1, Choose your Character</string>
+    <string name="player_two_chooses">Player 2, Choose your Character</string>
 </resources>
