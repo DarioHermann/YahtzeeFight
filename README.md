@@ -1,6 +1,6 @@
 # YahtzeeFight
 
-Yahtzee Fight is a Android app I made for my *Mobile Interactive Systems* module for my *MSc Computer Games Systems*.  
+Yahtzee Fight is a Android app I made for my *Mobile Interactive Systems* module for my *MSc Computer Games Systems*. It was done using Java.  
 It's a fusion between a 2D Fighting game that utilizes Yahtzee's rules for the attacks.  
 All the player does is basically play Yahtzee, but some strategy is required in this game!  
 If you download the APK, I hope you have fun with it!
